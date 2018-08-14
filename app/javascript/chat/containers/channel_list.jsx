@@ -1,6 +1,7 @@
 /* eslint no-bitwise:off */
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { selectChannel, fetchMessages } from '../actions/index';
@@ -13,7 +14,8 @@ class ChannelList extends Component {
   }
 
   handleClick = (channel) => {
-    this.props.selectChannel(channel);
+    this.props.selectChannel();
+    this.props.fetchMessages(channel)
   }
 
   renderChannel = (channel) => {
@@ -24,7 +26,9 @@ class ChannelList extends Component {
         onClick={() => this.handleClick(channel)}
         role="presentation"
       >
+      <Link to={`/channels/${channel}`} >
         #{channel}
+      </Link>
       </li>
     );
   }
@@ -43,8 +47,8 @@ class ChannelList extends Component {
 
 function mapStateToProps(state) {
   return {
-    channels: state.channels,
-    selectedChannel: state.selectedChannel
+    channels: state.channels
+    // selectedChannel: state.selectedChannel
   };
 }
 

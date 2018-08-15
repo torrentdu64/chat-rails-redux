@@ -3,7 +3,7 @@ class Api::V1::MessagesController < ApplicationController
   before_action :set_channel
 
   def index
-    messages = @channel.messages.order('content ASC')
+    messages = @channel.messages.order('id ASC')
     render json: messages
   end
 
